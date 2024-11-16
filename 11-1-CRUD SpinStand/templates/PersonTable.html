@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+   <head>
+     <title>Kristen Static Page</title> 
+   <body>
+    <h1>Person Table</h1>
+      <table id="Person">
+        <thead>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone Number</th>
+            <th>Email</th>
+            <th>Company</th>
+            <th>Maintenance</th>
+        </thead>
+        <tbody>
+          {% for person in collection %}
+          <tr>
+            <td>{{person[1]}}</td>
+            <td>{{person[2]}}</td>
+            <td>{{person[3]}}</td>
+            <td>{{person[4]}}</td>
+            <td>{{person[5]}}</td>
+            <td>
+              <a href="?delete=true&PersonID={{person[0]}}">Delete</a><br />
+              <a href="/updateperson?PersonID={{person[0]}}">Change</a>
+            </td>
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+      <form method="POST" action="/">
+        First Name: <input type="text" name="FirstName"><br>
+        Last Name: <input type="text" name="LastName"><br>
+        Phone Number: <input type="text" name="PhoneNumber"><br>
+        Email: <input type="text" name="Email"><br>
+        Company: <input type="text" name="Company"><br>
+        <input type="submit" value="submit">
+      </form>
+   </body>
+</html>

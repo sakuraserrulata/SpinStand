@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+  <title>SpinStand Database</title> 
+</head>
+<body>
+    <h1>Person Table</h1>
+      <table>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Phone Number</th>
+        </tr>
+        {% for person in collection %}
+        <tr>
+           <td>{{person[0]}}</td>
+           <td>{{person[1]}}</td>
+           <td>{{person[2]}}</td>
+           <td>
+            <a href="?delete=true&id={{row[0]}}">Delete</a><br />
+            <a href="/updateActor?id={{row[0]}}">Change</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+      <h2>Enter a new value here</h2>
+        <form action="">
+          First Name: <input type="text" name="FirstName"><br>
+          Last Name: <input type="text" name="LastName"><br>
+          Phone Number: <input type="text" name="PhoneNumber"><br>
+          <input type="submit" value="submit">
+        </form>
+
+</body>
+</html>

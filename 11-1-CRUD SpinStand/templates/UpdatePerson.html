@@ -1,0 +1,19 @@
+<html>
+
+<body>
+
+  <h1>Spindrift Farmstand Contacts</h1>
+
+  <h1>Please Enter or Change Contact Information</h1>
+  <form action="/updateperson" method="POST">
+    ID: <input type="text" name="PersonID" value="{{person[0]}}"><br />
+    First Name: <input type="text" name="FirstName" value="{{person[1]}}"><br />
+    Last Name: <input type="text" name="LastName" value="{{person[2]}}"><br />
+    Phone Number: <input type="text" name="PhoneNumber" value="{{person[3]}}"><br />
+    Email: <input type="text" name="Email" value="{{person[4]}}"><br />
+    Company: <input type="text" name="Company" value="{{person[5]}}"><br />
+    <input type="submit" name="Submit">
+  </form>
+</body>
+
+</html>
