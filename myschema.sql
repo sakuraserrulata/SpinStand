@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.39, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.40, for Linux (x86_64)
 --
 -- Host: localhost    Database: SpinStand
 -- ------------------------------------------------------
--- Server version	8.0.39-0ubuntu0.24.04.2
+-- Server version	8.0.40-0ubuntu0.24.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -25,8 +25,10 @@ DROP TABLE IF EXISTS `Fruit`;
 CREATE TABLE `Fruit` (
   `ProductID` int NOT NULL,
   `SpecialCare` varchar(255) DEFAULT NULL,
-  `Variety` enum('FrontenacGris','Marquette','TartCherry','SweetCherry') DEFAULT NULL,
+  `Variety` varchar(255) DEFAULT NULL,
   `UnitPrice` decimal(10,2) DEFAULT NULL,
+  `HarvestDate` date DEFAULT NULL,
+  `YearPrice` int DEFAULT NULL,
   PRIMARY KEY (`ProductID`),
   CONSTRAINT `Fruit_ibfk_1` FOREIGN KEY (`ProductID`) REFERENCES `Product` (`ProductID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -38,7 +40,7 @@ CREATE TABLE `Fruit` (
 
 LOCK TABLES `Fruit` WRITE;
 /*!40000 ALTER TABLE `Fruit` DISABLE KEYS */;
-INSERT INTO `Fruit` VALUES (1,'PickedandPacked','TartCherry',10.00),(2,'U-Pick','Marquette',4.00);
+INSERT INTO `Fruit` VALUES (1,'PickedandPacked','Tart',10.00,NULL,2024),(2,'U-Pick','Marquette',4.00,NULL,2024),(3,'Freeze','BlushingStar',8.00,NULL,2023),(4,'PickedandPacked','Arctic Glo',8.00,NULL,2023),(5,'U-Pick','Jupiter',5.00,NULL,2023),(6,'U-Pick','Rainier',10.00,NULL,2024),(7,'U-Pick','Montmorrency',10.00,NULL,2024),(8,'U-Pick','Skeena',10.00,NULL,2024),(9,'U-Pick','Sweetheart',10.00,NULL,2024),(10,'PickedandPacked','ColumbiaStar',8.00,NULL,2024),(11,'PickedandPacked','RedGeorge',8.00,NULL,2024),(12,'PickedandPacked','Gold',8.00,NULL,2024),(13,'PickedandPacked','Champagne',10.00,NULL,2024),(14,'PickedandPacked','Honeycrisp',6.00,NULL,2024),(15,'PickedandPacked','AuroraBorealis',12.00,NULL,2024);
 /*!40000 ALTER TABLE `Fruit` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,8 +84,10 @@ CREATE TABLE `Person` (
   `FirstName` varchar(100) NOT NULL,
   `LastName` varchar(100) NOT NULL,
   `PhoneNumber` varchar(15) DEFAULT NULL,
+  `Email` varchar(255) DEFAULT NULL,
+  `Company` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`PersonID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,7 +96,7 @@ CREATE TABLE `Person` (
 
 LOCK TABLES `Person` WRITE;
 /*!40000 ALTER TABLE `Person` DISABLE KEYS */;
-INSERT INTO `Person` VALUES (1,'Sylvie','Bac','801-888-1111'),(2,'Felix','Kag','801-888-2222'),(3,'Melissa','Pund','801-888-3333'),(4,'Martha','Von','801-888-4444');
+INSERT INTO `Person` VALUES (1,'Sylvie','Von Doersten','801-888-1111','sylvievond@gmail.com','Spindrift Organics'),(2,'Felix','Bacon','801-888-2222','felix@gmail.com','Spindrift Organics'),(3,'Melissa','Kagaya','801-888-3333','keytothemountain@gmail.com','Key to the Mountain'),(4,'Martha','Pundsack','3479090972','martha@bentfrenchman.com','Arcadian Winery'),(5,'Andy','Sponseller','406-218-8095','tenspoonwinery@gmail.com','Ten Spoon Winery'),(6,'Laura','Miller','406-253-9357','gatewayorchard@gmail.com','Gateway Orchard'),(8,'Howie','Long','917-658-7878','firebrand@earthlink.net','Firebrand Orchard'),(9,'Alexis','Von Doersten','406-360-2112','ARVenterprises@gmail.com','ARV, Enterprises'),(10,'Kelly','Moriarty','566-676-6687','kelly90803@yahoo.com','Brady Inc.'),(12,'Bill','McLaughlin','406-541-3772','butteinsuranceprof@gmail.com',''),(13,'Keila','Cross','406-360-1359','artastherapy@gmail.com','crossarttherapy@gmail.com'),(24,'Frank','Brickowski','503-779-3296','highliner@earthlink.net','Portland Trailblazers'),(25,'Paul','Beighle','406-274-7012','paulbeighle@gmail.com','Brothers Orchard');
 /*!40000 ALTER TABLE `Person` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -106,8 +110,9 @@ DROP TABLE IF EXISTS `Product`;
 CREATE TABLE `Product` (
   `ProductID` int NOT NULL AUTO_INCREMENT,
   `ProductName` varchar(255) NOT NULL,
+  `ProductType` enum('produce','event','other') NOT NULL,
   PRIMARY KEY (`ProductID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,7 +121,7 @@ CREATE TABLE `Product` (
 
 LOCK TABLES `Product` WRITE;
 /*!40000 ALTER TABLE `Product` DISABLE KEYS */;
-INSERT INTO `Product` VALUES (1,'Cherry'),(2,'WineGrape');
+INSERT INTO `Product` VALUES (1,'Cherry','produce'),(2,'WineGrape','produce'),(3,'Peach','produce'),(4,'Nectarine','produce'),(5,'TableGrape','produce'),(6,'RainierCherry','produce'),(7,'MontmorrencyCherry','produce'),(8,'SkeenaCherry','produce'),(9,'SweetheartCherry','produce'),(10,'Blackberry','produce'),(11,'Gooseberry','produce'),(12,'Raspberry','produce'),(13,'Current','produce'),(14,'Apple','produce'),(15,'Honeyberry','produce');
 /*!40000 ALTER TABLE `Product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,7 +146,7 @@ CREATE TABLE `ProductSeasonAvailability` (
 
 LOCK TABLES `ProductSeasonAvailability` WRITE;
 /*!40000 ALTER TABLE `ProductSeasonAvailability` DISABLE KEYS */;
-INSERT INTO `ProductSeasonAvailability` VALUES (1,'Summer'),(2,'Fall');
+INSERT INTO `ProductSeasonAvailability` VALUES (1,'Spring'),(1,'Summer'),(2,'Fall'),(3,'Summer'),(4,'Summer'),(5,'Fall'),(6,'Summer'),(7,'Summer'),(8,'Summer'),(9,'Summer'),(10,'Fall'),(10,'Summer'),(11,'Summer'),(13,'Fall'),(14,'Fall'),(15,'Spring');
 /*!40000 ALTER TABLE `ProductSeasonAvailability` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -210,4 +215,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-14  3:46:01
+-- Dump completed on 2024-11-16 18:31:39
