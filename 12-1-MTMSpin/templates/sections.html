@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block header %}{{pageTitle}}{% endblock %}
-{% block title %}Showing Sections{% endblock %}
+{% block title %}Showing Orders{% endblock %}
 
 
 {% block content %}
@@ -24,7 +24,7 @@
       {{row[2]}}
     </td>
     <td>
-      <a href="/showStudents?section_id={{row[0]}}">View Registered Students</a><br />
+      <a href="/showStudents?section_id={{row[0]}}">View Orders</a><br />
     </td>
   </tr>
   {% endfor %}

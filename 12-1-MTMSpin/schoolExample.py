@@ -32,10 +32,10 @@ def showStudents():
             courseNumber = myresult[0][4]
         else:
             courseName = courseNumber = "Unknown"
-        pageTitle = f"Showing all students in section {SalesOrderID}, {courseName} ({courseNumber})"
+        pageTitle = f"Showing all products in order {SalesOrderID}, {courseName} ({courseNumber})"
     else:
         mycursor.execute("SELECT ProductID, ProductName, ProductType from Product")
-        pageTitle = "Showing all students"
+        pageTitle = "Showing all products"
         myresult = mycursor.fetchall()
 
     mycursor.close()
@@ -81,11 +81,11 @@ def showSections():
         else:
             studentName = "Unknown"
             othersections = None
-        pageTitle = f"Showing all sections for student: {studentName})"
+        pageTitle = f"Showing all orders for products: {studentName})"
     else:
         mycursor.execute("""SELECT SalesOrder.OrderID, FirstName, LastName from SalesOrder
                          join Person on SalesOrder.PersonID=Person.PersonID""")
-        pageTitle = "Showing all sections"
+        pageTitle = "Showing all orders"
         sections = mycursor.fetchall()
         othersections = None
 
