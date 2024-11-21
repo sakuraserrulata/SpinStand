@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block header %}{{pageTitle}}{% endblock %}
+{% block title %}Sales Order Info{% endblock %}
+
+
+{% block content %}
+
+
+<form action="">
+  <h2>Information for SalesOrder {{OrderID}} <input type="hidden" name="OrderID" value="{{OrderID}}"><br /></h2>
+  First Name: {{FirstName}}<br />
+  Last Name: {{LastName}}<br />
+  Order Date: <input type="text" name="OrderDate" value="{{OrderDate}}"><br />
+  Total Cost: <input type="text" name="TotalCost" value="{{TotalCost}}"><br />
+  <input type="submit" value="Update Information">
+</form>
+
+<h2>Registered Products</h2>
+
+<table>
+  <tr>
+    <th>Product ID</th>
+    <th>Product Name</th>
+    <th>Product Type</th>
+  </tr>
+{% for product in registeredProducts%}
+  <tr>
+    <td>{{Product[0]}}</td>
+    <td>{{Product[1]}}</td>
+    <td>{{Product[2]}}</td>
+    <td><a href="product-info?ProductID={{Product[0]}}">View Product</a></td>
+    <td><a href="salesorder-info?remove_ProductID={{Product[0]}}&OrderID={{OrderID}}">Unregister Product</a></td>
+  </tr>
+{% endfor %}
+</table>
+{% endblock %}

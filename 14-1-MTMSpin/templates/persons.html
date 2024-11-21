@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block header %}{{pageTitle}}{% endblock %}
+{% block title %}Showing Person{% endblock %}
+
+
+{% block content %}
+<table>
+  <tr>
+    <th>Person ID</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Phone Number</th>
+    <th>Email</th>
+    <th>Company</th>
+  </tr>
+  {% for row in allPerson %}
+  <tr>
+    <td>{{row[0]}}</td>
+    <td>{{row[1]}}</td>
+    <td>{{row[2]}}</td>
+    <td>{{row[3]}}</td>
+    <td>{{row[4]}}</td>
+    <td>{{row[5]}}</td>
+    <td>
+      <a href="/person-info?PersonID={{row[0]}}">View Person</a><br />
+      <a href="/persons?delete_PersonID={{row[0]}}">Delete Person</a><br />
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+
+<h3>Add new Person</h3>
+<form action="">
+  Person ID: <input name="new_PersonID" ><br />
+  First Name: <input type="text" name="new_FirstName"><br />
+  Last Name: <input type="text" name="new_LastName"><br />
+  Phone Number: <input type="text" name="new_PhoneNumber"><br />
+  <input type="submit" value="Add Person">
+</form>
+{% endblock %}

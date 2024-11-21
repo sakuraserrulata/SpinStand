@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block header %}{{pageTitle}}{% endblock %}
+{% block title %}Showing Products{% endblock %}
+
+
+{% block content %}
+
+<table>
+  <tr>
+    <th>Produc ID</th>
+    <th>Product Name</th>
+    <th>Product Type</th>
+  </tr>
+  {% for row in productList %}
+  <tr>
+    <td>
+      {{row[0]}}
+    </td>
+    <td>
+      {{row[1]}}
+    </td>
+    <td>
+      {{row[2]}}
+    </td>
+    <td>
+      <a href="/product-info?ProductID={{row[0]}}">View Product</a><br />
+      <a href="/products?delete_ProductID={{row[0]}}">Delete Product</a><br />
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+
+<h3>Add new product</h3>
+<form action="">
+  Product ID: <input name="new_ProductID" ><br />
+  Product Name: <input name="new_ProductName"><br />
+  Product Type: <input name="new_ProductType"><br />
+  <input type="submit" value="Add product">
+</form>
+{% endblock %}
