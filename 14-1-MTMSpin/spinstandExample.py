@@ -41,21 +41,20 @@ def get_salesorder_info():
         connection.commit()
 
     # retrive basic information for the salesorder
-    mycursor.execute("SELECT FirstName, LastName, OrderDate, TotalCost, PersonID from SalesOrder join Person on PersonID=Person.PersonID where SalesOrder.OrderID=%s", (OrderID,))
+    mycursor.execute("SELECT FirstName, LastName, OrderDate, TotalCost, SalesOrder.PersonID from SalesOrder join Person on SalesOrder.PersonID=Person.PersonID where SalesOrder.OrderID=%s", (OrderID,))
     try:
         FirstName, LastName, OrderDate, TotalCost, PersonID = mycursor.fetchall()[0]
     except:
         return render_template("error.html", message="Error retrieving SalesOrder")
     
     # retrieve registration info
-    mycursor.execute("""SELECT ProductID, ProductName, ProductType from Product 
+    mycursor.execute("""SELECT Product.ProductID, ProductName, ProductType from Product 
                      join OrderProduct on OrderProduct.ProductID=Product.ProductID 
                      join SalesOrder on OrderProduct.OrderID=SalesOrder.OrderID 
                      where SalesOrder.OrderID=%s
                      order by ProductName""", (OrderID,)
                      )
     registeredproducts = mycursor.fetchall()
-
 
     mycursor.close()
     connection.close()
@@ -66,7 +65,7 @@ def get_salesorder_info():
                            OrderDate=OrderDate,
                            TotalCost=TotalCost,
                            PersonID=PersonID,
-                           registeredproducts=registeredproducts
+                           registered_Products=registeredproducts
                            )
 
 @app.route('/product-info', methods=['GET'])
@@ -106,7 +105,7 @@ def get_product_info():
         return """Error - unable to find product. <a href="/products">Return to the product list</a>"""
     
     # retrieve the products's person from the database
-    mycursor.execute("""SELECT SalesOrder.OrderID, FirstName, LastName, OrderDate, TotalCost, PersonID from OrderProduct
+    mycursor.execute("""SELECT OrderProduct.OrderID, FirstName, LastName, OrderDate, TotalCost, Person.PersonID from OrderProduct
                          join SalesOrder on SalesOrder.OrderID=OrderProduct.OrderID
                          join Person on Person.PersonID=SalesOrder.PersonID
                          where OrderProduct.ProductID=%s""", (ProductID,))
@@ -119,7 +118,7 @@ def get_product_info():
                          select OrderID as OrderID from SalesOrder
                          except
                          select OrderID from OrderProduct where ProductID=%s) as remainingSalesOrders
-                     join SalesOrder on remainingSalesOrders.OrderID=OrderID
+                     join SalesOrder on remainingSalesOrders.OrderID=SalesOrder.OrderID
                      join Person on Person.PersonID=SalesOrder.PersonID""", (ProductID,))
     all_sections = mycursor.fetchall()
 
@@ -178,11 +177,11 @@ def get_salesorders():
         request.args.get('new_OrderID'), 
         request.args.get('new_OrderDate'), 
         request.args.get('new_TotalCost'), 
-        request.args.get('new_ProductID')
+        request.args.get('PersonID')
     )
     
     if not None in (new_SalesOrder_info):
-        mycursor.execute("INSERT INTO SalesOrder (OrderID, OrderDate, TotalCost, ProductID) values (%s, %s, %s, %s)", new_SalesOrder_info)
+        mycursor.execute("INSERT INTO SalesOrder (OrderID, OrderDate, TotalCost, PersonID) values (%s, %s, %s, %s)", new_SalesOrder_info)
         connection.commit()
 
     # check to see if a SalesOrder needs to be deleted
@@ -240,7 +239,7 @@ def get_persons():
     connection.close()
     return render_template('persons.html', allPersons=allPersons)
 
-@app.route('/Person-info', methods=['GET'])
+@app.route('/person-info', methods=['GET'])
 def get_person_info():
     PersonID = request.args.get('PersonID')
     
@@ -276,14 +275,14 @@ def get_person_info():
     mycursor.close()
     connection.close()
 
-    return render_template("Person-info.html",
+    return render_template("person-info.html",
                            PersonID=PersonID,
                            FirstName=FirstName,
                            LastName=LastName,
                            PhoneNumber=PhoneNumber,
                            Email=Email,
                            Company=Company,
-                           existingSections=existingSalesOrders
+                           existingSalesOrders=existingSalesOrders
                            )
 
 if __name__ == '__main__':

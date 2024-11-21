@@ -14,7 +14,7 @@
     <th>Email</th>
     <th>Company</th>
   </tr>
-  {% for row in allPerson %}
+  {% for row in allPersons %}
   <tr>
     <td>{{row[0]}}</td>
     <td>{{row[1]}}</td>
@@ -37,6 +37,8 @@
   First Name: <input type="text" name="new_FirstName"><br />
   Last Name: <input type="text" name="new_LastName"><br />
   Phone Number: <input type="text" name="new_PhoneNumber"><br />
+  Email: <input type="text" name="new_Email"><br />
+  Company: <input type="text" name="new_Company"><br />
   <input type="submit" value="Add Person">
 </form>
 {% endblock %}

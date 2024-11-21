@@ -24,13 +24,13 @@
     <th>Product Name</th>
     <th>Product Type</th>
   </tr>
-{% for product in registeredProducts%}
+{% for product in registered_Products %}
   <tr>
-    <td>{{Product[0]}}</td>
-    <td>{{Product[1]}}</td>
-    <td>{{Product[2]}}</td>
-    <td><a href="product-info?ProductID={{Product[0]}}">View Product</a></td>
-    <td><a href="salesorder-info?remove_ProductID={{Product[0]}}&OrderID={{OrderID}}">Unregister Product</a></td>
+    <td>{{product[0]}}</td>
+    <td>{{product[1]}}</td>
+    <td>{{product[2]}}</td>
+    <td><a href="product-info?ProductID={{product[0]}}">View Product</a></td>
+    <td><a href="salesorder-info?remove_ProductID={{product[0]}}&OrderID={{OrderID}}">Unregister Product</a></td>
   </tr>
 {% endfor %}
 </table>

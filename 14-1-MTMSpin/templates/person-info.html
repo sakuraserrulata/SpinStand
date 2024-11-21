@@ -25,16 +25,14 @@
     <th>Order ID</th>
     <th>Order Date</th>
     <th>Total Cost</th>
-    <th>Person ID</th>
   </tr>
-{% for salesorder in existing SalesOrder %}
+{% for salesorder in existingSalesOrders %}
   <tr>
-    <td><a href="salesorder-info?OrderID={{SalesOrder[0]}}">{{SalesOrder[0]}}</a></td>
-    <td>{{SalesOrder[1]}}</td>
-    <td>{{SalesOrder[2]}}</td>
-    <td>{{SalesOrder[3]}}</td>
+    <td><a href="salesorder-info?OrderID={{salesorder[0]}}">{{salesorder[0]}}</a></td>
+    <td>{{salesorder[1]}}</td>
+    <td>{{salesorder[2]}}</td>
   </tr>
-{% endfor%}
+{% endfor %}
 
 </table>
 {% endblock %}

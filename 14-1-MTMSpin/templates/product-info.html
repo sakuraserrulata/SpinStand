@@ -22,7 +22,7 @@ Registered SalesOrders
     <th>Order Date</th>
     <th>Total Cost</th>
   </tr>
-  {% for SalesOrder in registered_salesorders %}
+  {% for SalesOrder in registered_SalesOrders %}
   <tr>
     <td>
       {{SalesOrder[0]}}
@@ -41,7 +41,7 @@ Registered SalesOrders
   </tr>
   {% endfor %}
 </table>
-<form action=""">
+<form action="">
 <p><label for="register">Register for additional products</label></p>
 <select id="register" name="add_OrderID">
   {% for product in unregistered_products %}

@@ -42,14 +42,14 @@
 <h3>Add new sales order</h3>
 <form action="">
   Order ID: <input name="new_OrderID" ><br />
-  First Name: <select id="FirstName" name="new_OrderID">
+  
+  Name: <select id="FirstName" name="PersonID">
     {% for Person in allPersons %}
     <option value="{{Person[0]}}">{{Person[2]}} - {{Person[1]}}</option>
     {% endfor %}
   </select><br />
   Order Date: <input name="new_OrderDate"> <br />
   Total Cost: <input name="new_TotalCost"> <br />
-  PersonID: <input name="new_PersonID"> <br />
   
   <input type="submit" value="Add SalesOrder">
 </form>
