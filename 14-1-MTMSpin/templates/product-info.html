@@ -21,6 +21,7 @@ Registered SalesOrders
     <th>Last Name</th>
     <th>Order Date</th>
     <th>Total Cost</th>
+    <th>Delete</th>
   </tr>
   {% for SalesOrder in registered_SalesOrders %}
   <tr>
@@ -36,19 +37,19 @@ Registered SalesOrders
     <td>{{SalesOrder[3]}}</td>
     <td>{{SalesOrder[4]}}</td>
     <td>
-      <a href="/product-info?ProductID={{ProductID}}&drop_OrderID={{SalesOrder[0]}}">Unregister</a><br />
+      <a href="/product-info?ProductID={{ProductID}}&drop_OrderID={{SalesOrder[0]}}">Delete</a><br />
     </td>
   </tr>
   {% endfor %}
 </table>
 <form action="">
 <p><label for="register">Register for additional products</label></p>
-<select id="register" name="add_OrderID">
+<select OrderID="register" name="add_OrderID">
   {% for product in unregistered_products %}
   <option value="{{SalesOrder[0]}}">{{SalesOrder[0]}} - {{SalesOrder[1]}} ({{SalesOrder[2]}})</option>
   {% endfor %}
 </select>
 <input type="hidden" name="ProductID" value="{{ProductID}}">
-<input type="submit" value="Add SalesOrder">
+<input type="submit" name="Add SalesOrder">
 </form>
 {% endblock %}

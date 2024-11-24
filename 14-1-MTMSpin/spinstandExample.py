@@ -93,9 +93,9 @@ def get_product_info():
         connection.commit()
 
     # check to see if a salesOrder needs to be added
-    add_SalesOrder_OrderID = request.args.get('add_section_id')
+    add_SalesOrder_OrderID = request.args.get('add_SalesOrder_OrderID')
     if add_SalesOrder_OrderID is not None:
-        mycursor.execute("""INSERT into OrderProduct (ProductId, OrderID) values (%s, %s)""", (ProductID, add_SalesOrder_OrderID))
+        mycursor.execute("""INSERT into OrderProduct (ProductID, OrderID) values (%s, %s)""", (ProductID, add_SalesOrder_OrderID))
         connection.commit()
 
     # retreve the product information from the database
@@ -234,10 +234,12 @@ def get_persons():
     # retrieve a list of all persons
     mycursor.execute("SELECT PersonID, FirstName, LastName, PhoneNumber, Email, Company from Person")
     allPersons = mycursor.fetchall()
-
+    #pageTitle = "Showing all people"
+    
     mycursor.close()
     connection.close()
     return render_template('persons.html', allPersons=allPersons)
+    #pageTitle=pageTitle
 
 @app.route('/person-info', methods=['GET'])
 def get_person_info():
