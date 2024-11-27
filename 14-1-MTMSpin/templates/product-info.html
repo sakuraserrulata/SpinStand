@@ -44,12 +44,12 @@ Registered SalesOrders
 </table>
 <form action="">
 <p><label for="register">Register for additional products</label></p>
-<select OrderID="register" name="add_OrderID">
+<select id="register" name="add_SalesOrder_OrderID">
   {% for product in unregistered_products %}
-  <option value="{{SalesOrder[0]}}">{{SalesOrder[0]}} - {{SalesOrder[1]}} ({{SalesOrder[2]}})</option>
+  <option value="{{Product.OrderID}}">{{Product.OrderID}} - {{Product.ProductName}} ({{Product.Quantity}})</option>
   {% endfor %}
 </select>
-<input type="hidden" name="ProductID" value="{{ProductID}}">
-<input type="submit" name="Add SalesOrder">
+<input type="hidden" name="ProductID" value="{{ ProductID }}">
+<input type="submit" value="Add SalesOrder">
 </form>
 {% endblock %}
