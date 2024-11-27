@@ -16,3 +16,5 @@ Question 3: I want to look up volume of sales and payment method preferences per
 November 16, 2024
 Final ER Diagram for SpinStand Database - LucidChart
 [SpindriftDatabaseERDiagram-3.pdf](https://github.com/user-attachments/files/17787649/SpindriftDatabaseERDiagram-3.pdf)
+
+![SpinStandTables copy](https://github.com/user-attachments/assets/b22aecd0-9794-4cc4-8e40-94ac4af65182)
