@@ -97,7 +97,7 @@ def get_product_info():
     if add_SalesOrder_OrderID is not None:
         mycursor.execute("""INSERT into OrderProduct (ProductID, OrderID) values (%s, %s)""", (ProductID, add_SalesOrder_OrderID))
         connection.commit()
-
+        
     # retreve the product information from the database
     mycursor.execute("Select ProductName, ProductType from Product where ProductID=%s", (ProductID,))
     ProductName_first, ProductType_last = mycursor.fetchone()
@@ -172,7 +172,7 @@ def get_salesorders():
     connection = mysql.connector.connect(**creds)
     mycursor = connection.cursor()
 
-    # check to see if a new section needs to be added
+    # check to see if a new sales order needs to be added
     new_SalesOrder_info = (
         request.args.get('new_OrderID'), 
         request.args.get('new_OrderDate'), 
@@ -234,8 +234,7 @@ def get_persons():
     # retrieve a list of all persons
     mycursor.execute("SELECT PersonID, FirstName, LastName, PhoneNumber, Email, Company from Person")
     allPersons = mycursor.fetchall()
-    #pageTitle = "Showing all people"
-    
+    pageTitle = "Showing all people"
     mycursor.close()
     connection.close()
     return render_template('persons.html', allPersons=allPersons)

@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
 {% block header %}{{pageTitle}}{% endblock %}
-{% block title %}Sales Order Info{% endblock %}
+{% block title %}Sales Order Information{% endblock %}
 
 
 {% block content %}
 
 
 <form action="">
-  <h2>Information for SalesOrder {{OrderID}} <input type="hidden" name="OrderID" value="{{OrderID}}"><br /></h2>
+  <h2>Information for Sales Order {{OrderID}} <input type="hidden" name="OrderID" value="{{OrderID}}"><br /></h2>
   First Name: {{FirstName}}<br />
   Last Name: {{LastName}}<br />
   Order Date: <input type="text" name="OrderDate" value="{{OrderDate}}"><br />
