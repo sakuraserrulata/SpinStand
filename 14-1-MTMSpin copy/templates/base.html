@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+   <head>
+      <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+      <title>{% block title %}{% endblock %} - SpinStand</title></head>
+   <body>
+      <h1>
+         {% block header %}Spindrift Organics Orchard & Vineyard Database{% endblock %}
+      </h1>
+      {% block content %}{% endblock %}
+      <p><a href="/products">Show all products</a></p>
+      <p><a href="/salesorders">Show all sales orders</a></p>
+      <p><a href="/persons">Show all people</a></p>
+   </body>
+</html>

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block header %}{{pageTitle}}{% endblock %}
+{% block title %}Showing Sales Orders{% endblock %}
+
+
+{% block content %}
+<table>
+  <tr>
+    <th>Order ID</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Order Date</th>
+    <th>Total Cost</th>
+    <th>Maintenance</th>
+  </tr>
+  {% for row in salesorderList %}
+  <tr>
+    <td>
+      {{row[0]}}
+    </td>
+    <td>
+      {{row[1]}}
+    </td>
+    <td>
+      {{row[2]}}
+    </td>
+    <td>
+      {{row[3]}}
+    </td>
+    <td>
+      {{row[4]}}
+    </td>
+    <td>
+      <a href="/salesorder-info?OrderID={{row[0]}}">View Order</a><br />
+      <a href="/salesorders?delete_OrderID={{row[0]}}">Delete Order</a><br />
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+
+<h3>Add new sales order</h3>
+<form action="">
+  Order ID: <input name="new_OrderID" ><br />
+  
+  Name: <select id="FirstName" name="PersonID">
+    {% for Person in allPersons %}
+    <option value="{{Person[0]}}">{{Person[2]}} - {{Person[1]}}</option>
+    {% endfor %}
+  </select><br />
+  Order Date: <input name="new_OrderDate"> <br />
+  Total Cost: <input name="new_TotalCost"> <br />
+  
+  <input type="submit" value="Add SalesOrder">
+</form>
+{% endblock %}

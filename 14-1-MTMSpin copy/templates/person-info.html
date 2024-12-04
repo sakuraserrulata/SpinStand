@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block header %}{{pageTitle}}{% endblock %}
+{% block title %}Person Info{% endblock %}
+
+
+{% block content %}
+
+
+<form action="">
+  <h2>Information for Person {{PersonID}} <input type="hidden" name="PersonID" value="{{PersonID}}"><br /></h2>
+  First Name: <input type="text" value="{{FirstName}}" name="FirstName"><br />
+  Last Name: <input type="text" value="{{LastName}}" name="LastName"><br />
+  Phone Number: <input type="text" value="{{PhoneNumber}}" name="PhoneNumber"><br />
+  Email: <input type="text" value="{{Email}}" name="Email"><br />
+  Company: <input type="text" value="{{Company}}" name="Company"><br />
+
+  <input type="submit" value="Update Information">
+</form>
+
+<h2>Existing SalesOrder</h2>
+
+<table>
+  <tr>
+    <th>Order ID</th>
+    <th>Order Date</th>
+    <th>Total Cost</th>
+  </tr>
+{% for salesorder in existingSalesOrders %}
+  <tr>
+    <td><a href="salesorder-info?OrderID={{salesorder[0]}}">{{salesorder[0]}}</a></td>
+    <td>{{salesorder[1]}}</td>
+    <td>{{salesorder[2]}}</td>
+  </tr>
+{% endfor %}
+
+</table>
+{% endblock %}
